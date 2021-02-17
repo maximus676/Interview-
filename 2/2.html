@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <input name="size" type="radio" value="S"> S
+   <input name="size" type="radio" value="M"> M
+    <input name="size" type="radio" value="L"> L
+    <hr>
+    <input name="color" type="checkbox" value="1">1
+    <input name="color" type="checkbox" value="2">2
+    <input name="color" type="checkbox" value="3">3
+    <input name="color" type="checkbox" value="4">4
+    <input name="color" type="checkbox" value="5">5
+    <hr>
+    <select multiple onchange="selectListener()">
+        <option name="manufacturer" value="aaa">aaa</option>
+        <option name="manufacturer" value="b&c">b&c</option>
+        <option name="manufacturer" value="ddd">ddd</option>
+        <option name="manufacturer" value="eee">eee</option>
+    </select>
+   <hr>
+   <input id="sale" type="checkbox" value="1">1
+</body>
+<script>
+    //  Дабы распарсить url нам нужно его получить способом window.location.href в нашем примере мы создадим отдельно обект url
+
+    const url = new URL ("http://любой_домен/filter?size=M&color=1&color=2&manufacturer=aaa&manufacturer=ddd")
+
+    const size = url.searchParams.get('size');
+    const color = url.searchParams.getAll('color');
+    const manufacturer = url.searchParams.getAll('manufacturer');
+
+    const radioInputs = document.getElementsByName("size")
+    for(let i = 0; i < radioInputs.length; i++){
+        if(size === radioInputs[i].value){
+            radioInputs[i].checked = true
+        }
+        radioInputs[i].addEventListener("input", function (event) {
+            url.searchParams.set("size", radioInputs[i].value)
+            console.log(url.search)
+            })
+    }
+
+    const checkboxInputs = document.getElementsByName("color")
+    for(let i = 0; i < checkboxInputs.length; i++){
+        if(color.includes(checkboxInputs[i].value)){
+            checkboxInputs[i].checked = true
+        }
+        checkboxInputs[i].addEventListener("input", function (event) {
+            url.searchParams.delete("color")
+            document.getElementsByName("color").forEach(element => {
+                if (element.checked) {
+                    url.searchParams.append("color", element.value)
+                }
+            })
+            console.log(url.search)
+        })
+    }
+
+    const manufacturerOption = document.getElementsByName("manufacturer")
+    for(let i = 0; i <manufacturerOption.length; i++){
+        if(manufacturer.includes(manufacturerOption[i].value)){
+            manufacturerOption[i].selected = true
+        }
+    }
+
+    function selectListener() {
+        url.searchParams.delete("manufacturer")
+        const options = document.getElementsByName("manufacturer")
+        options.forEach(element => {
+            if (element.selected) {
+                url.searchParams.append("manufacturer", element.value)
+            }
+        })
+        console.log(url.search)
+    }
+
+    document.getElementById("sale").checked = true
+
+</script>
+</html>

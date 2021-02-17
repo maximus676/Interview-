@@ -1,0 +1,19 @@
+.img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.selectedPages{
+    cursor: pointer;
+}
+.paginator{
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+.delet{
+    display: flex;
+}
+.name{
+    margin-left: 5px;
+    margin-right: 15px;
+}

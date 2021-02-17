@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>One</title>
+</head>
+<body>
+    <iframe id="123" src="domainTwo.html"></iframe>
+
+    <button onclick="Write()">Write</button>
+    <button onclick="Read() ">Read</button>
+    <button onclick="Delete()">Delete</button>
+</body>
+<script>
+    const frame = document.getElementById("123")
+    const storageTwo = frame.contentWindow.localStorage
+
+
+    function Write () {
+        try {
+            storageTwo.setItem('name', 'Max');
+            console.log("written")
+            frame.contentWindow.crossDomain()
+        }catch (e){
+            console.log(e)
+        }
+    }
+    function Read () {
+        try {
+            const Name =storageTwo.getItem('name');
+            console.log(Name)
+            frame.contentWindow.crossDomain()
+        }catch (e){
+            console.log(e)
+        }
+    }
+    function Delete () {
+        try {
+            storageTwo.removeItem("name");
+            console.log("removed")
+            frame.contentWindow.crossDomain()
+        }catch (e){
+            console.log(e)
+        }
+    }
+</script>
+</html>

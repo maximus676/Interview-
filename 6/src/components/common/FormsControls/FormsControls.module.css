@@ -1,0 +1,16 @@
+.formControl.error input,
+.formControl.error textarea       /*если у нас есть .form-control и внутри лежит эрор то нужно делать так */
+{
+    border: solid red 3px;
+}
+
+.formControl.error span
+{
+    background-color: #841010;
+    border: solid red 2px;
+    padding: 2px;
+    color: red;
+    width: 200px;
+    text-align: center;
+    margin-left: 20px;
+}

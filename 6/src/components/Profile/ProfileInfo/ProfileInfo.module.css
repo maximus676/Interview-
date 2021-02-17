@@ -1,0 +1,11 @@
+.content__img{
+    width: 100%;
+
+}
+.descriptionBlock{
+    padding: 10px;
+}
+.img{
+    max-width: 200px;
+    max-height: 200px;
+}
